@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import stylesheet from "./app.css?url";
+import { getDb } from './db'
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,6 +24,10 @@ export const links: Route.LinksFunction = () => [
   },
   { rel: "stylesheet", href: stylesheet },
 ];
+
+export async function loader() {
+  console.log(getDb())
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
