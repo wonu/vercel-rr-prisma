@@ -5,9 +5,11 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../app/generated/prisma"
-  // runtime  = "vercel-edge"
+  provider     = "prisma-client"
+  output       = "../app/generated/prisma"
+  // runtime      = "vercel-edge"
+  moduleFormat = "cjs"
+  engineType   = "client"
 }
 
 datasource db {
