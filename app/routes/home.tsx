@@ -4,7 +4,7 @@ import { Quotes } from '~/components/quotes'
 import { QuotesLoading } from '~/components/quotes-loading'
 import { DisplayPrismaEnums } from '~/components/display-prisma-enums'
 import type { Route } from "./+types/home";
-import { getDb } from '~/db'
+import prisma from '~/db'
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,11 +13,7 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader({ context }: Route.LoaderArgs) {
-  const prisma = getDb({
-    connectionString: context.cloudflare.env.DIRECT_URL!,
-  })
-
+export async function loader({}: Route.LoaderArgs) {
   const quotes = await prisma.quotes.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -32,7 +28,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     <main className="flex min-h-screen flex-col items-center justify-start p-8 md:p-24 bg-white dark:bg-slate-900">
       <div className="text-center mb-12">
         <h1 className="text-2xl font-bold text-slate-800 dark:text-white mb-4">
-          Stack: React Router, Vite, Cloudflare Workerd<pre className="inlin-block">prisma-client</pre>
+          Stack: React Router, Vite, Node.js<pre className="inlin-block">prisma-client</pre>
         </h1>
 
         <p className="text-xl text-slate-600 dark:text-slate-300">

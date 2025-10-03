@@ -8,12 +8,6 @@ generator client {
   provider        = "prisma-client"
   output          = "../app/generated/prisma"
   previewFeatures = ["driverAdapters", "queryCompiler"]
-  runtime         = "edge-light"
-}
-
-generator seed {
-  provider = "prisma-client"
-  output   = "./generated/prisma-seed"
 }
 
 datasource db {
