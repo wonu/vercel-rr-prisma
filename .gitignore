@@ -6,4 +6,6 @@
 /build/
 
 /app/generated/prisma
+prisma/generated
 .env
+.vercel
