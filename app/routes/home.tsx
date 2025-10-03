@@ -4,16 +4,16 @@ import { Quotes } from '~/components/quotes'
 import { QuotesLoading } from '~/components/quotes-loading'
 import { DisplayPrismaEnums } from '~/components/display-prisma-enums'
 import type { Route } from "./+types/home";
-import prisma from '~/db'
+import { prisma } from '~/db'
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
   ];
 }
 
-export async function loader({}: Route.LoaderArgs) {
+export async function loader({ }: Route.LoaderArgs) {
   const quotes = await prisma.quotes.findMany({
     orderBy: {
       createdAt: 'desc',
