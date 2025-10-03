@@ -8,6 +8,7 @@ generator client {
   provider   = "prisma-client"
   output     = "../app/generated/prisma"
   engineType = "client"
+  runtime    = "vercel-edge"
 }
 
 datasource db {
