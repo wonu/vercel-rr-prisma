@@ -5,15 +5,13 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider   = "prisma-client"
-  output     = "../app/generated/prisma"
-  engineType = "client"
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // Connection pooler URL for queries
-  directUrl = env("POSTGRES_URL_NON_POOLING") // Direct connection for migrations
+  provider = "postgresql"
+  url      = env("PRISMA_DATABASE_URL")
 }
 
 enum QuoteKind {

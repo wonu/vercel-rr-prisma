@@ -1,15 +1,5 @@
-import { PrismaPg } from '@prisma/adapter-pg'
+import { withAccelerate } from '@prisma/extension-accelerate'
 import { PrismaClient } from '~/generated/prisma/client'
 
-export type GetDbParams = {
-  connectionString: string
-}
-
-export function getDb({ connectionString }: GetDbParams) {
-  const pool = new PrismaPg({ connectionString })
-  const prisma = new PrismaClient({ adapter: pool })
-
-  return prisma
-}
-
-export const prisma = getDb({ connectionString: process.env.POSTGRES_URL_NON_POOLING! })
+export const prisma = new PrismaClient()
+  .$extends(withAccelerate())
