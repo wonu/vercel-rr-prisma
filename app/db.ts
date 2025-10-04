@@ -1,18 +1,15 @@
-import { Pool, type ClientConfig } from 'pg'
-import { attachDatabasePool } from '@vercel/functions'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '~/generated/prisma/client'
-import { parseIntoClientConfig } from 'pg-connection-string';
 
-const config: ClientConfig = parseIntoClientConfig(process.env.POSTGRES_URL_NON_POOLING!)
+export type GetDbParams = {
+  connectionString: string
+}
 
-const pool = new Pool({
-  ...config,
-  ssl: { rejectUnauthorized: false }
-})
+export function getDb({ connectionString }: GetDbParams) {
+  const pool = new PrismaPg({ connectionString })
+  const prisma = new PrismaClient({ adapter: pool })
 
-attachDatabasePool(pool)
+  return prisma
+}
 
-export const prisma = new PrismaClient({
-  adapter: new PrismaPg(pool),
-})
+export const prisma = getDb({ connectionString: process.env.POSTGRES_URL_NON_POOLING! })
